@@ -1,5 +1,6 @@
 package br.com.alura.escolalura.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,21 @@ public class Aluno {
 	private List<Nota> notas;
 	
 	private List<Habilidade> habilidades;
+	
+	public Aluno adicionarHabilidade(Aluno aluno, Habilidade habilidade){
+		List<Habilidade> habilidades = aluno.getHabilidades();
+		habilidades.add(habilidade);
+		aluno.setHabilidades(habilidades);
+		return aluno;
+		
+	}
+	
+	public Aluno adicionarNota(Aluno aluno, Nota nota){
+		List<Nota> notas = aluno.getNotas();
+		notas.add(nota);
+		aluno.setNotas(notas);
+		return aluno;
+	}
 
 	public String getId() {
 		return id;
@@ -56,6 +72,9 @@ public class Aluno {
 	}
 
 	public List<Nota> getNotas() {
+		if (notas == null) {
+			notas = new ArrayList<>();
+		}
 		return notas;
 	}
 
@@ -64,6 +83,9 @@ public class Aluno {
 	}
 
 	public List<Habilidade> getHabilidades() {
+		if (habilidades == null) {
+			habilidades = new ArrayList<>();
+		}
 		return habilidades;
 	}
 

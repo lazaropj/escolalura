@@ -1,8 +1,5 @@
 package br.com.alura.escolalura.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,13 +30,7 @@ public class NotaController {
 	@PostMapping("/nota/salvar/{id}")
 	public String salvar(@PathVariable("id") String id, @ModelAttribute Nota nota){
 		Aluno aluno = alunoRepository.findOne(id);
-		List<Nota> notas = aluno.getNotas();
-		if (notas == null) {
-			notas = new ArrayList<>();
-		}
-		notas.add(nota);
-		aluno.setNotas(notas);
-		alunoRepository.save(aluno);
+		alunoRepository.save(aluno.adicionarNota(aluno, nota));
 		return "redirect:/aluno/listar";
 	}
 	

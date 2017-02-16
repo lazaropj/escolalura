@@ -1,8 +1,5 @@
 package br.com.alura.escolalura.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,13 +30,7 @@ public class HabilidadeController {
 	@PostMapping("/habilidade/salvar/{id}")
 	public String salvar(@PathVariable("id") String id, @ModelAttribute Habilidade habilidade){
 		Aluno aluno = alunoRepository.findOne(id);
-		List<Habilidade> habilidades = aluno.getHabilidades();
-		if (habilidades == null) {
-			habilidades = new ArrayList<>();
-		}
-		habilidades.add(habilidade);
-		aluno.setHabilidades(habilidades);
-		alunoRepository.save(aluno);
+		alunoRepository.save(aluno.adicionarHabilidade(aluno, habilidade));
 		return "redirect:/aluno/listar";
 	}
 	
